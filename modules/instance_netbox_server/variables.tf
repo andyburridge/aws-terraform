@@ -1,3 +1,9 @@
+# ----------------
+# Variables file associated with NetBox Instance module.
+#
+# Andrew Burridge - 11/2021
+# ----------------
+
 variable "ami" {
     type = string
     description = "Instance AMI"

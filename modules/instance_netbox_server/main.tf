@@ -1,3 +1,11 @@
+# ----------------
+# Module to create an AWS Instance with an ENI and Elastic IP, together with an appropriate Security Group for running NetBox Docker.
+# Downloads and installs NetBox docker by applying the 'build.sh' script as Instance User Data, making it available on port TCP/8000.
+#
+# Andrew Burridge - 11/2021
+# ----------------
+
+
 terraform {
     required_version = ">= 1.0.11"
 }
@@ -7,7 +15,7 @@ terraform {
 # ----------------
 
 data template_file "netbox_server_build_data" {
-    template = "${file("../../modules/netbox_server/build.sh")}"
+    template = "${file("../../modules/instance_netbox_server/build.sh")}"
 }
 
 
@@ -78,6 +86,6 @@ resource "aws_network_interface" "netbox_server_nic" {
 resource "aws_eip" "netbox_server_eip" {
   vpc                       = true
   network_interface         = aws_network_interface.netbox_server_nic.id
-  associate_with_private_ip = "10.0.1.50"
+  associate_with_private_ip = var.nic_private_ip[0]
   depends_on                = [var.eip_dependencies]
 }
