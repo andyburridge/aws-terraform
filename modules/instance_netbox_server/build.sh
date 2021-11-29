@@ -1,6 +1,7 @@
 #!/bin/bash
 sleep 30
 sudo apt update -y
+sudo apt install awscli -y
 sudo apt install docker -y
 sudo apt install docker-compose -y
 cd /opt

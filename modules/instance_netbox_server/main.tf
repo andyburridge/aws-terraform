@@ -60,14 +60,15 @@ resource "aws_security_group" "allow_netbox_web" {
 }
 
 resource "aws_instance" "netbox_server" {
-  ami                 =   var.ami 
-  instance_type       =   var.instance_type
-  availability_zone   =   var.availability_zone
-  key_name            =   var.ssh_key
+  ami                  = var.ami 
+  instance_type        = var.instance_type
+  availability_zone    = var.availability_zone
+  key_name             = var.ssh_key
+  iam_instance_profile = "netbox-backup" 
   
   network_interface {
-      device_index          =   0
-      network_interface_id  =   aws_network_interface.netbox_server_nic.id
+      device_index          = 0
+      network_interface_id  = aws_network_interface.netbox_server_nic.id
   }  
 
   user_data = "${data.template_file.netbox_server_build_data.rendered}"
@@ -78,9 +79,9 @@ resource "aws_instance" "netbox_server" {
 }
 
 resource "aws_network_interface" "netbox_server_nic" {
-  subnet_id         =   var.subnet_id
-  private_ips       =   var.nic_private_ip
-  security_groups   =   [aws_security_group.allow_netbox_web.id]
+  subnet_id       = var.subnet_id
+  private_ips     = var.nic_private_ip
+  security_groups = [aws_security_group.allow_netbox_web.id]
 }
 
 resource "aws_eip" "netbox_server_eip" {
