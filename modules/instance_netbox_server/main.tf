@@ -67,8 +67,8 @@ resource "aws_instance" "netbox_server" {
   iam_instance_profile = "netbox-backup" 
   
   network_interface {
-      device_index          = 0
-      network_interface_id  = aws_network_interface.netbox_server_nic.id
+      device_index         = 0
+      network_interface_id = aws_network_interface.netbox_server_nic.id
   }  
 
   user_data = "${data.template_file.netbox_server_build_data.rendered}"

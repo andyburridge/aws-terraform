@@ -51,11 +51,11 @@ variable "subnet_2_availability_zone" {
 }
 
 variable "internet_gw_name" {
-    type = string
+    type        = string
     description = "IGW Name"
 }
 
 variable "route_table_name" {
-    type = string
+    type        = string
     description = "Route Table Name"
 }

@@ -5,13 +5,13 @@
 # ----------------
 
 variable "region" {
-    type = string
+    type        = string
     description = "AWS Deployment Region"
-    default = "eu-west-2"
+    default     = "eu-west-2"
 }
 
 variable "credentials_profile" {
-    type = string
+    type        = string
     description = "AWS Credentials Proflie"
-    default = "andrewburridge-default"
+    default     = "andrewburridge-default"
 }
